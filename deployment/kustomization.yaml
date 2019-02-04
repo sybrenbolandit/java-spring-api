@@ -1,0 +1,6 @@
+namespace: jenkins-project
+commonLabels:
+  app: java-spring-api
+resources:
+- deployment.yaml
+- service.yaml
