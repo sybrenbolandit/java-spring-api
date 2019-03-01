@@ -3,4 +3,5 @@ commonLabels:
   app: java-spring-api
 resources:
 - deployment.yaml
+- ingress.yaml
 - service.yaml
