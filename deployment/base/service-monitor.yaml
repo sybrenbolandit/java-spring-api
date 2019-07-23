@@ -1,0 +1,16 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: java-spring-api
+  labels:
+    prometheus: jenkins-project
+spec:
+  selector:
+    matchLabels:
+      app: java-spring-api
+  endpoints:
+  - port: actuator
+    path: /actuator/prometheus
+  targetLabels:
+  - env
+  - app
