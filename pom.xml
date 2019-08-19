@@ -65,7 +65,7 @@
                 <artifactId>dockerfile-maven-plugin</artifactId>
                 <version>1.3.6</version>
                 <configuration>
-                    <repository>shboland/${project.artifactId}</repository>
+                    <repository>sybrenbolandit/${project.artifactId}</repository>
                 </configuration>
             </plugin>
         </plugins>
