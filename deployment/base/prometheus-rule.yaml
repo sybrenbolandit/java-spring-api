@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   name: java-spring-api-rules
   labels:
-    prometheus: jenkins-project
+    prometheus: sybrenbolandit
     role: alert-rules
 spec:
   groups:
