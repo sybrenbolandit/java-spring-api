@@ -1,4 +1,4 @@
-namespace: jenkins-project
+namespace: sybrenbolandit
 commonLabels:
   env: test
 bases:

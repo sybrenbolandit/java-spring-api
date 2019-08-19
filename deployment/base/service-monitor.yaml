@@ -3,7 +3,7 @@ kind: ServiceMonitor
 metadata:
   name: java-spring-api
   labels:
-    prometheus: jenkins-project
+    prometheus: sybrenbolandit
 spec:
   selector:
     matchLabels:
