@@ -11,13 +11,6 @@ metrics:
 logzio:
   enabled: false
 
-ingress:
-  path: java-spring-api
-  hosts:
-    # empty host entry will route traffic for all "hosts"
-    -
-  tls: []
-
 autoscaling:
   enabled: false
 
