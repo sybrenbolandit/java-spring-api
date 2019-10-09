@@ -1,0 +1,33 @@
+environment: local
+
+image:
+  tag: latest
+  repository: sybrenbolandit/java-spring-api
+  pullPolicy: Always
+
+metrics:
+  enabled: false
+
+logzio:
+  enabled: false
+
+ingress:
+  path: java-spring-api
+  hosts:
+    # empty host entry will route traffic for all "hosts"
+    -
+  tls: []
+
+autoscaling:
+  enabled: false
+
+livenessProbe:
+  enabled: false
+
+readinessProbe:
+  enabled: false
+
+resources: {}
+
+application.properties: |
+  TODO: add you application properties here

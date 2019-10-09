@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "java-spring-api.labels" . | nindent 4 }}
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /{{ or $.Values.ingress.path  $.Release.Name }}/(.*)
+            backend:
+              serviceName: {{ include "java-spring-api.fullname" $ }}
+              servicePort: 8080
