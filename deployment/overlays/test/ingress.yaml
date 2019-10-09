@@ -1,6 +1,0 @@
-apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: java-spring-api-rules
-  annotations:
-    nginx.ingress.kubernetes.io/whitelist-source-range: 82.32.164.22/0

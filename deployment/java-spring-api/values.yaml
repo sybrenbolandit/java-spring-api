@@ -1,0 +1,36 @@
+environment: local
+
+image:
+  tag: latest
+  repository: sybrenbolandit/java-spring-api
+  pullPolicy: Always
+
+metrics:
+  enabled: false
+
+logzio:
+  enabled: false
+
+autoscaling:
+  enabled: false
+
+livenessProbe:
+  enabled: false
+
+readinessProbe:
+  enabled: false
+
+resources: {}
+
+application.properties: |
+  ############################################################################################
+  # ACTUATOR
+  ############################################################################################
+  management.server.port=8081
+  management.server.address=0.0.0.0
+  management.endpoints.web.exposure.include=shutdown,health,prometheus
+  management.endpoint.shutdown.enabled=true
+  management.metrics.enable.jvm=true
+  management.endpoint.metrics.enabled=true
+  management.endpoint.prometheus.enabled=true
+  management.metrics.export.prometheus.enabled=true
