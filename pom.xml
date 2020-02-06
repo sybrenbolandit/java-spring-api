@@ -24,6 +24,7 @@
         <java.version>1.8</java.version>
 
         <micrometer.version>1.0.4</micrometer.version>
+        <springdoc.version>1.2.30</springdoc.version>
     </properties>
 
     <dependencies>
@@ -44,6 +45,12 @@
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
             <version>${micrometer.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
 
         <dependency>
