@@ -51,18 +51,35 @@ spec:
           {{- end}}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
-          lifecycle:
-            preStop:
-              exec:
-                command: ["curl", "-XPOST", "http://0.0.0.0:8081/actuator/shutdown"]
           volumeMounts:
             - name: application-config
               mountPath: /srv/app/application.properties
               subPath: application.properties
             - name: varlog
               mountPath: /var/log
+        {{- if .Values.logs.enabled }}
+        - name: fluent-bit
+          image: fluent/fluent-bit
+          resources:
+            requests:
+              cpu: 5m
+              memory: 10Mi
+            limits:
+              cpu: 50m
+              memory: 60Mi
+          volumeMounts:
+            - name: varlog
+              mountPath: /var/log
+            - name: fluent-bit-config
+              mountPath: /fluent-bit/etc/
+        {{- end }}
       volumes:
         - name: application-config
           configMap:
             name: {{ include "java-spring-api.fullname" . }}
         - name: varlog
+        {{- if .Values.logs.enabled }}
+        - name: fluent-bit-config
+          configMap:
+            name: {{ include "java-spring-api.fullname" . }}-fluentbit
+        {{- end }}

@@ -6,6 +6,9 @@ metrics:
 ingress:
   path: spring
 
+logs:
+  enabled: true
+
 autoscaling:
   enabled: true
   minReplicas: 1
@@ -37,6 +40,15 @@ resources:
     cpu: "1"
 
 applicationProperties: |
+  ############################################################################################
+  # LOGGING
+  ############################################################################################
+  server.tomcat.accesslog.enabled: true
+  server.tomcat.accesslog.prefix: access
+  server.tomcat.accesslog.suffix: .log
+  server.tomcat.accesslog.pattern: '%a - - %t "%r" %s %D ms'
+  server.tomcat.accesslog.directory: /var/log
+
   ############################################################################################
   # ACTUATOR
   ############################################################################################
