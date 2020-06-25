@@ -1,7 +1,7 @@
 environment: local
 
 image:
-  tag: latest
+  tag: 1.1.0
   repository: sybrenbolandit/java-spring-api
   pullPolicy: Always
 
@@ -18,6 +18,9 @@ livenessProbe:
   enabled: false
 
 readinessProbe:
+  enabled: false
+
+logs:
   enabled: false
 
 resources: {}

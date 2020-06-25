@@ -1,0 +1,41 @@
+{{- if .Values.logs.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "java-spring-api.fullname" . }}-fluentbit
+  labels:
+  {{ include "java-spring-api.labels" . | nindent 4 }}
+data:
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush             1
+        Log_Level         info
+        Daemon            off
+        Parsers_File      parsers.conf
+    [INPUT]
+        Name              tail
+        Tag               java_log
+        Path              /var/log/java.log
+        Multiline         On
+        Parser_Firstline  java_multiline
+        DB                /var/log/flb.db
+        Mem_Buf_Limit     5MB
+        Skip_Long_Lines   On
+        Refresh_Interval  10
+    [FILTER]
+        Name              record_modifier
+        Match             *
+        Record            hostname ${HOSTNAME}
+        Record            environment {{ required "A valid .Values.environment entry required!" .Values.environment }}
+        Record            app {{ include "java-spring-api.fullname" . }}
+    [OUTPUT]
+        Name              forward
+        Match             *
+        Host              fluentd
+        Port              24224
+  parsers.conf: |
+    [PARSER]
+        Name              java_multiline
+        Format            regex
+        Regex             /^(?<date>[0-9]+-[0-9]+-[0-9]+\s+[0-9]+:[0-9]+:[0-9]+.[0-9]+)\s+(?<loglevel>\S+)\s+(?<pid>\S+)\s+---\s+\[(?<thread>.*?)\]\s+(?<logger>\S+)\s+:\s+(?<message>.*)$/
+{{- end }}

@@ -1,5 +1,8 @@
-FROM java:8
-VOLUME /tmp
-ADD target/java-spring-api-1.0.0-SNAPSHOT.jar app.jar
-RUN bash -c 'touch /app.jar'
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+FROM openjdk:11-jre-slim
+
+ADD target/java-spring-api-1.0.0-SNAPSHOT.jar /srv/app/app.jar
+COPY logback.xml /srv/app
+
+WORKDIR /srv/app
+
+ENTRYPOINT [ "java", "-Dlogging.config=file:/srv/app/logback.xml", "-jar", "app.jar" ]
